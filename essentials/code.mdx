@@ -1,0 +1,192 @@
+---
+title: "Code blocks"
+description: "Display inline code and code blocks with syntax highlighting"
+icon: "code"
+---
+
+DubStack provides excellent syntax highlighting for code examples. This guide shows how to display code inline and in dedicated blocks.
+
+## Inline code
+
+To denote a `word` or `phrase` as code, enclose it in backticks (\`).
+
+```markdown
+To denote a `word` or `phrase` as code, enclose it in backticks (`).
+```
+
+## Code blocks
+
+Use [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) by enclosing code in three backticks. Add the programming language after the opening backticks for syntax highlighting.
+
+```javascript
+const config = {
+  apiUrl: 'https://api.dubstack.com',
+  apiKey: process.env.DUBSTACK_API_KEY
+};
+```
+
+````markdown
+```javascript
+const config = {
+  apiUrl: 'https://api.dubstack.com',
+  apiKey: process.env.DUBSTACK_API_KEY
+};
+```
+````
+
+## Adding filenames
+
+Optionally add a filename after the language for better context:
+
+```javascript config.js
+const config = {
+  apiUrl: 'https://api.dubstack.com',
+  apiKey: process.env.DUBSTACK_API_KEY
+};
+```
+
+````markdown
+```javascript config.js
+const config = {
+  apiUrl: 'https://api.dubstack.com',
+  apiKey: process.env.DUBSTACK_API_KEY
+};
+```
+````
+
+## Supported languages
+
+DubStack supports syntax highlighting for 100+ languages including:
+
+- **JavaScript** - `javascript`, `js`
+- **TypeScript** - `typescript`, `ts`
+- **Python** - `python`, `py`
+- **Bash/Shell** - `bash`, `sh`, `shell`
+- **JSON** - `json`
+- **YAML** - `yaml`, `yml`
+- **Markdown** - `markdown`, `md`
+- **MDX** - `mdx`
+- **HTML** - `html`
+- **CSS** - `css`
+- **Java** - `java`
+- **Go** - `go`
+- **Rust** - `rust`
+- **Ruby** - `ruby`
+- **PHP** - `php`
+- **C/C++** - `c`, `cpp`
+- **SQL** - `sql`
+- **GraphQL** - `graphql`
+
+## Multiple language examples
+
+Use `<CodeGroup>` to show the same concept in multiple languages:
+
+<CodeGroup>
+```javascript Node.js
+const response = await fetch('https://api.dubstack.com/docs', {
+  headers: { Authorization: `Bearer ${apiKey}` }
+});
+const data = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get('https://api.dubstack.com/docs',
+  headers={'Authorization': f'Bearer {api_key}'})
+data = response.json()
+```
+
+```bash cURL
+curl -X GET 'https://api.dubstack.com/docs' \
+  -H 'Authorization: Bearer YOUR_API_KEY'
+```
+</CodeGroup>
+
+````mdx
+<CodeGroup>
+```javascript Node.js
+const response = await fetch('https://api.dubstack.com/docs');
+```
+
+```python Python
+import requests
+response = requests.get('https://api.dubstack.com/docs')
+```
+
+```bash cURL
+curl https://api.dubstack.com/docs
+```
+</CodeGroup>
+````
+
+## Line highlighting
+
+Highlight specific lines to draw attention to important code:
+
+```javascript {2,4-6}
+const config = {
+  apiUrl: 'https://api.dubstack.com',  // Highlighted
+  timeout: 5000,
+  headers: {                            // Highlighted
+    'Authorization': `Bearer ${token}`  // Highlighted
+  }                                     // Highlighted
+};
+```
+
+````markdown
+```javascript {2,4-6}
+const config = {
+  apiUrl: 'https://api.dubstack.com',
+  timeout: 5000,
+  headers: {
+    'Authorization': `Bearer ${token}`
+  }
+};
+```
+````
+
+## Code annotations
+
+Add inline comments to explain complex code:
+
+```typescript
+// Initialize DubStack client
+const client = new DubStack({
+  apiKey: process.env.DUBSTACK_API_KEY,  // Get from dashboard
+  baseUrl: 'https://api.dubstack.com',   // Production URL
+  timeout: 30000                         // 30 second timeout
+});
+
+// Fetch documentation
+const docs = await client.docs.list();
+```
+
+## Best practices
+
+<Callout type="success">
+**Do** include complete, runnable examples that users can copy and paste.
+</Callout>
+
+<Callout type="success">
+**Do** use realistic data instead of placeholders like `foo`, `bar`, `example`.
+</Callout>
+
+<Callout type="warning">
+**Don't** include real API keys or secrets in code examples.
+</Callout>
+
+<Callout type="warning">
+**Don't** show incomplete code that won't run without modification.
+</Callout>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Images" icon="image" href="/essentials/images">
+    Learn how to embed images and media
+  </Card>
+  <Card title="Navigation" icon="map" href="/essentials/navigation">
+    Configure your documentation navigation
+  </Card>
+</CardGroup>
