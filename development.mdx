@@ -1,0 +1,325 @@
+---
+title: "Local Development"
+description: "Preview changes locally before deploying to production"
+icon: "code"
+---
+
+<Callout type="info">
+**Prerequisites**:
+- Node.js 18 or higher
+- A documentation repository with a `dubstack.json` file
+- Git configured and connected (optional for development)
+</Callout>
+
+DubStack provides a local development server to preview your documentation changes before deploying them to production.
+
+## Installation
+
+<Steps>
+<Step title="Clone your repository">
+  Clone your documentation repository that contains the `dubstack.json` configuration file.
+
+  ```bash
+  git clone https://github.com/yourorg/your-docs.git
+  cd your-docs
+  ```
+</Step>
+
+<Step title="Install DubStack CLI">
+  Install the DubStack CLI globally:
+
+  ```bash
+  npm install -g @dubstack/cli
+  ```
+
+  Or use with npx (no installation required):
+
+  ```bash
+  npx @dubstack/cli dev
+  ```
+</Step>
+
+<Step title="Start the development server">
+  Navigate to your docs directory and run:
+
+  ```bash
+  dubstack dev
+  ```
+
+  Your documentation will be available at `http://localhost:3000`.
+</Step>
+</Steps>
+
+## Custom ports
+
+By default, DubStack runs on port 3000. Customize the port using the `--port` flag:
+
+```bash
+dubstack dev --port 3333
+```
+
+If port 3000 is already in use, DubStack will automatically use the next available port:
+
+```md
+Port 3000 is already in use. Using port 3001 instead.
+```
+
+## Hot reload
+
+DubStack watches for file changes and automatically reloads:
+
+- **MDX files** - Content changes appear immediately
+- **dubstack.json** - Configuration updates reload the site
+- **Images** - New images are processed and displayed
+- **CSS** - Custom styles update without refresh
+
+<Callout type="tip">
+Changes are typically reflected in under 1 second. No need to manually refresh your browser.
+</Callout>
+
+## Validating links
+
+Check for broken links in your documentation:
+
+```bash
+dubstack check-links
+```
+
+This scans all MDX files and reports:
+- Broken internal links
+- Missing images
+- Invalid navigation references
+- Duplicate page paths
+
+## Building for production
+
+Test a production build locally:
+
+```bash
+dubstack build
+```
+
+This:
+1. Validates all configuration
+2. Checks for broken links
+3. Optimizes images
+4. Generates static pages
+5. Reports any errors
+
+<Callout type="warning">
+Fix all errors shown by `dubstack build` before deploying to production.
+</Callout>
+
+## Deployment
+
+When you push changes to your Git repository, DubStack automatically:
+
+1. **Receives webhook** - Git provider notifies DubStack
+2. **Fetches content** - Pulls latest changes from your repo
+3. **Syncs to R2** - Updates cached documentation
+4. **Deploys** - Makes changes live within seconds
+
+If deployment succeeds, you'll see this in the dashboard:
+
+<Frame>
+  <img src="/images/checks-passed.png" alt="Deployment confirmation showing all checks have passed" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+## Code formatting
+
+We recommend these VS Code extensions for the best development experience:
+
+<CardGroup cols={2}>
+  <Card title="MDX Extension" icon="markdown">
+    Syntax highlighting for MDX files
+    [Install](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx)
+  </Card>
+  <Card title="Prettier" icon="wand-magic-sparkles">
+    Automatic code formatting
+    [Install](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  </Card>
+</CardGroup>
+
+### Prettier configuration
+
+Create `.prettierrc` in your docs root:
+
+```json
+{
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "overrides": [
+    {
+      "files": "*.mdx",
+      "options": {
+        "parser": "mdx"
+      }
+    }
+  ]
+}
+```
+
+## Environment variables
+
+For local development, create a `.env.local` file:
+
+```bash
+DUBSTACK_API_KEY=your_api_key_here
+DUBSTACK_PROJECT_ID=your_project_id
+
+# Optional: Custom API endpoint
+DUBSTACK_API_URL=https://api.dubstack.com
+
+# Optional: Enable debug logging
+DEBUG=dubstack:*
+```
+
+<Callout type="warning">
+Never commit `.env.local` to version control. Add it to your `.gitignore` file.
+</Callout>
+
+## CLI Commands
+
+<AccordionGroup>
+<Accordion title="dubstack dev">
+  Start the local development server with hot reload.
+
+  **Options:**
+  - `--port <number>` - Custom port (default: 3000)
+  - `--host <string>` - Custom host (default: localhost)
+  - `--open` - Open browser automatically
+
+  ```bash
+  dubstack dev --port 3333 --open
+  ```
+</Accordion>
+
+<Accordion title="dubstack build">
+  Build the documentation for production.
+
+  **Options:**
+  - `--output <path>` - Build output directory
+  - `--analyze` - Analyze bundle size
+
+  ```bash
+  dubstack build --analyze
+  ```
+</Accordion>
+
+<Accordion title="dubstack check-links">
+  Validate all links in your documentation.
+
+  **Options:**
+  - `--fix` - Automatically fix simple issues
+  - `--external` - Check external links too (slower)
+
+  ```bash
+  dubstack check-links --external
+  ```
+</Accordion>
+
+<Accordion title="dubstack preview">
+  Preview the production build locally.
+
+  ```bash
+  dubstack build
+  dubstack preview
+  ```
+</Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+<Accordion title="Error: Cannot find module 'sharp'">
+  This may be due to an outdated Node.js version or platform compatibility issue.
+
+  **Solution:**
+  1. Remove the CLI: `npm remove -g @dubstack/cli`
+  2. Update to Node.js 18 or higher
+  3. Reinstall: `npm install -g @dubstack/cli`
+</Accordion>
+
+<Accordion title="Port 3000 already in use">
+  Another process is using port 3000.
+
+  **Solutions:**
+  - Use a custom port: `dubstack dev --port 3333`
+  - Kill the process using port 3000: `lsof -ti:3000 | xargs kill`
+</Accordion>
+
+<Accordion title="Changes not appearing">
+  Hot reload may not be working properly.
+
+  **Solutions:**
+  1. Check that you're editing files in the correct directory
+  2. Restart the dev server: `Ctrl+C` then `dubstack dev`
+  3. Clear your browser cache: `Cmd+Shift+R` (Mac) or `Ctrl+Shift+R` (Windows)
+  4. Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
+</Accordion>
+
+<Accordion title="dubstack.json validation errors">
+  Your configuration file has syntax errors.
+
+  **Common issues:**
+  - Missing commas between fields
+  - Unclosed brackets or quotes
+  - Invalid JSON syntax
+
+  **Solution:**
+  Use [jsonlint.com](https://jsonlint.com) to validate your `dubstack.json` file.
+</Accordion>
+
+<Accordion title="Images not loading">
+  Images must be in the correct directory.
+
+  **Solution:**
+  1. Place images in `/images` directory at repository root
+  2. Reference them with absolute paths: `/images/hero.png`
+  3. Ensure image file names don't have spaces
+</Accordion>
+</AccordionGroup>
+
+## Debugging
+
+Enable debug mode to see detailed logs:
+
+```bash
+DEBUG=dubstack:* dubstack dev
+```
+
+This shows:
+- File change events
+- Build processes
+- API requests
+- Error stack traces
+
+## Version management
+
+Check your CLI version:
+
+```bash
+dubstack --version
+```
+
+Update to the latest version:
+
+```bash
+npm update -g @dubstack/cli
+```
+
+Check the [CLI changelog](https://github.com/dubstack/cli/releases) for updates.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Writing content" icon="pen-to-square" href="/essentials/markdown">
+    Learn about MDX components and content best practices
+  </Card>
+  <Card title="Git integration" icon="git-branch" href="/features/git-sync">
+    Connect your repository for automatic deployments
+  </Card>
+</CardGroup>
