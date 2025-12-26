@@ -1,0 +1,344 @@
+---
+title: "Navigation"
+description: "Configure your documentation navigation in dubstack.json"
+icon: "map"
+---
+
+The navigation configuration in `dubstack.json` controls how pages appear in your sidebar, header, and footer.
+
+## Basic navigation structure
+
+Your navigation is defined in `dubstack.json`:
+
+```json dubstack.json
+{
+  "site": {
+    "name": "DubStack Docs",
+    "url": "https://docs.example.com"
+  },
+  "navigation": {
+    "sidebar": [
+      {
+        "section": "Getting Started",
+        "items": [
+          { "label": "Introduction", "href": "/" },
+          { "label": "Quick Start", "href": "/quickstart" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+<Callout type="info">
+Pages not included in `dubstack.json` won't appear in the sidebar but are still accessible via direct links and search.
+</Callout>
+
+## Sidebar navigation
+
+The sidebar is the main navigation menu. Organize pages into sections:
+
+```json
+"navigation": {
+  "sidebar": [
+    {
+      "section": "Getting Started",
+      "items": [
+        { "label": "Introduction", "href": "/" },
+        { "label": "Quick Start", "href": "/quickstart" },
+        { "label": "Installation", "href": "/installation" }
+      ]
+    },
+    {
+      "section": "Guides",
+      "items": [
+        { "label": "Theme Customization", "href": "/guides/themes" },
+        { "label": "Content Management", "href": "/guides/content" },
+        { "label": "API Integration", "href": "/guides/api" }
+      ]
+    }
+  ]
+}
+```
+
+## Header navigation
+
+Add links to your header for quick access:
+
+```json
+"navigation": {
+  "header": [
+    { "label": "Home", "href": "/" },
+    { "label": "Docs", "href": "/docs" },
+    { "label": "API", "href": "/api-reference" },
+    { "label": "Blog", "href": "https://blog.example.com", "external": true }
+  ]
+}
+```
+
+## Nested navigation
+
+Create nested navigation groups for complex hierarchies:
+
+```json
+"navigation": {
+  "sidebar": [
+    {
+      "section": "API Reference",
+      "items": [
+        { "label": "Introduction", "href": "/api-reference/introduction" },
+        {
+          "section": "Endpoints",
+          "items": [
+            { "label": "GET", "href": "/api-reference/endpoint/get" },
+            { "label": "POST", "href": "/api-reference/endpoint/create" },
+            { "label": "DELETE", "href": "/api-reference/endpoint/delete" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Icons in navigation
+
+Add icons to navigation items using [Lucide icon](https://lucide.dev) names:
+
+```json
+{
+  "section": "Getting Started",
+  "icon": "rocket",
+  "items": [
+    { "label": "Quick Start", "href": "/quickstart", "icon": "zap" },
+    { "label": "Installation", "href": "/installation", "icon": "download" }
+  ]
+}
+```
+
+## External links
+
+Link to external resources:
+
+```json
+{
+  "label": "GitHub",
+  "href": "https://github.com/yourorg/yourrepo",
+  "external": true,
+  "icon": "github"
+}
+```
+
+## Folder structure
+
+Organize your MDX files in folders to keep things tidy:
+
+```
+docs/
+├── index.mdx                    → /
+├── quickstart.mdx               → /quickstart
+├── essentials/
+│   ├── markdown.mdx             → /essentials/markdown
+│   ├── code.mdx                 → /essentials/code
+│   └── images.mdx               → /essentials/images
+└── api-reference/
+    ├── introduction.mdx         → /api-reference/introduction
+    └── endpoint/
+        ├── get.mdx              → /api-reference/endpoint/get
+        └── create.mdx           → /api-reference/endpoint/create
+```
+
+Update your navigation to match:
+
+```json
+{
+  "section": "Essentials",
+  "items": [
+    { "label": "Markdown", "href": "/essentials/markdown" },
+    { "label": "Code", "href": "/essentials/code" },
+    { "label": "Images", "href": "/essentials/images" }
+  ]
+}
+```
+
+<Callout type="warning">
+Don't include `.mdx` file extensions in navigation hrefs. DubStack adds them automatically.
+</Callout>
+
+## Footer navigation
+
+Configure footer links:
+
+```json
+"footer": {
+  "links": [
+    {
+      "section": "Company",
+      "items": [
+        { "label": "About", "href": "/about" },
+        { "label": "Blog", "href": "https://blog.example.com" },
+        { "label": "Contact", "href": "/contact" }
+      ]
+    },
+    {
+      "section": "Resources",
+      "items": [
+        { "label": "Documentation", "href": "/" },
+        { "label": "API Reference", "href": "/api-reference" },
+        { "label": "Community", "href": "https://discord.gg/example" }
+      ]
+    }
+  ],
+  "social": {
+    "github": "https://github.com/yourorg",
+    "twitter": "https://twitter.com/yourorg",
+    "discord": "https://discord.gg/example"
+  }
+}
+```
+
+## Hidden pages
+
+Pages not in `dubstack.json` are "hidden" - they don't appear in navigation but are accessible:
+
+```
+docs/
+├── index.mdx                    ✅ In navigation
+├── quickstart.mdx               ✅ In navigation
+└── secret-beta-feature.mdx      ❌ Not in navigation (but accessible via direct link)
+```
+
+Use cases for hidden pages:
+- Beta features
+- Internal documentation
+- Draft content
+- Landing pages from external links
+
+## Navigation order
+
+Navigation items appear in the order they're listed in `dubstack.json`:
+
+```json
+{
+  "section": "Guides",
+  "items": [
+    { "label": "First", "href": "/first" },    // Shows first
+    { "label": "Second", "href": "/second" },  // Shows second
+    { "label": "Third", "href": "/third" }     // Shows third
+  ]
+}
+```
+
+## Collapsible sections
+
+Sections automatically collapse/expand on click:
+
+```json
+{
+  "section": "Advanced Topics",
+  "collapsed": true,  // Start collapsed
+  "items": [
+    { "label": "Custom CSS", "href": "/advanced/css" },
+    { "label": "Webhooks", "href": "/advanced/webhooks" }
+  ]
+}
+```
+
+## Best practices
+
+<Steps>
+  <Step title="Use clear, descriptive labels">
+    Navigation labels should clearly indicate what the page contains.
+
+    ✅ Good: "API Authentication"
+    ❌ Bad: "Auth"
+  </Step>
+
+  <Step title="Keep hierarchy shallow">
+    Avoid nesting more than 2-3 levels deep. Complex hierarchies are hard to navigate.
+  </Step>
+
+  <Step title="Group related content">
+    Organize pages into logical sections that match how users think about your product.
+  </Step>
+
+  <Step title="Update navigation when adding pages">
+    New pages won't appear automatically - you must add them to `dubstack.json`.
+  </Step>
+</Steps>
+
+## Complete example
+
+```json dubstack.json
+{
+  "site": {
+    "name": "My Docs",
+    "url": "https://docs.example.com"
+  },
+  "navigation": {
+    "header": [
+      { "label": "Home", "href": "/" },
+      { "label": "Docs", "href": "/docs" }
+    ],
+    "sidebar": [
+      {
+        "section": "Getting Started",
+        "icon": "rocket",
+        "items": [
+          { "label": "Introduction", "href": "/", "icon": "book" },
+          { "label": "Quick Start", "href": "/quickstart", "icon": "zap" },
+          { "label": "Development", "href": "/development", "icon": "code" }
+        ]
+      },
+      {
+        "section": "Essentials",
+        "icon": "layers",
+        "items": [
+          { "label": "Markdown", "href": "/essentials/markdown" },
+          { "label": "Code", "href": "/essentials/code" },
+          { "label": "Images", "href": "/essentials/images" },
+          { "label": "Navigation", "href": "/essentials/navigation" },
+          { "label": "Snippets", "href": "/essentials/reusable-snippets" },
+          { "label": "Settings", "href": "/essentials/settings" }
+        ]
+      },
+      {
+        "section": "API Reference",
+        "icon": "code",
+        "items": [
+          { "label": "Introduction", "href": "/api-reference/introduction" },
+          { "label": "GET", "href": "/api-reference/endpoint/get" },
+          { "label": "POST", "href": "/api-reference/endpoint/create" },
+          { "label": "DELETE", "href": "/api-reference/endpoint/delete" }
+        ]
+      }
+    ],
+    "footer": {
+      "links": [
+        {
+          "section": "Resources",
+          "items": [
+            { "label": "Documentation", "href": "/" },
+            { "label": "API Reference", "href": "/api-reference" }
+          ]
+        }
+      ],
+      "social": {
+        "github": "https://github.com/yourorg",
+        "twitter": "https://twitter.com/yourorg"
+      }
+    }
+  }
+}
+```
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Reusable snippets" icon="recycle" href="/essentials/reusable-snippets">
+    Create reusable content blocks
+  </Card>
+  <Card title="Settings" icon="gear" href="/essentials/settings">
+    Configure site-wide settings
+  </Card>
+</CardGroup>
