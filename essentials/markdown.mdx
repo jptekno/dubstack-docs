@@ -1,0 +1,242 @@
+---
+title: "MDX Components"
+description: "Learn about DubStack's MDX components for rich, interactive documentation"
+icon: "markdown"
+---
+
+DubStack uses MDX - Markdown with React components. This guide covers all available components and how to use them.
+
+## Basic Markdown
+
+DubStack supports all standard Markdown syntax:
+
+```markdown
+# Heading 1
+## Heading 2
+### Heading 3
+
+**Bold text** and *italic text*
+
+- Bullet list
+- Another item
+
+1. Numbered list
+2. Another item
+
+[Link text](https://example.com)
+
+![Alt text](/images/example.png)
+```
+
+## Callouts
+
+Highlight important information with callout boxes:
+
+<Callout type="info">
+This is an info callout for neutral information.
+</Callout>
+
+<Callout type="warning">
+This is a warning callout for important cautions.
+</Callout>
+
+<Callout type="success">
+This is a success callout for positive confirmations.
+</Callout>
+
+<Callout type="error">
+This is an error callout for critical information.
+</Callout>
+
+```mdx
+<Callout type="info">
+Your message here
+</Callout>
+```
+
+## Cards
+
+Use cards for navigation or feature highlights:
+
+<Card title="Quick Start" icon="rocket" href="/quickstart">
+Get up and running in 5 minutes
+</Card>
+
+<CardGroup cols={2}>
+  <Card title="Theme Studio" icon="palette" href="/features/theme-studio">
+    Customize your docs visually
+  </Card>
+  <Card title="AI Assistant" icon="sparkles" href="/features/ai-assistant">
+    Built-in AI-powered search
+  </Card>
+</CardGroup>
+
+```mdx
+<Card title="Title" icon="icon-name" href="/path">
+Description here
+</Card>
+
+<CardGroup cols={2}>
+  <Card title="Card 1" icon="icon1" href="/path1">
+    Description 1
+  </Card>
+  <Card title="Card 2" icon="icon2" href="/path2">
+    Description 2
+  </Card>
+</CardGroup>
+```
+
+## Tabs
+
+Show alternative content or platform-specific instructions:
+
+<Tabs>
+  <Tab title="npm">
+    ```bash
+    npm install @dubstack/sdk
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn add @dubstack/sdk
+    ```
+  </Tab>
+  <Tab title="pnpm">
+    ```bash
+    pnpm add @dubstack/sdk
+    ```
+  </Tab>
+</Tabs>
+
+```mdx
+<Tabs>
+  <Tab title="Tab 1">
+    Content 1
+  </Tab>
+  <Tab title="Tab 2">
+    Content 2
+  </Tab>
+</Tabs>
+```
+
+## Steps
+
+Create numbered step-by-step instructions:
+
+<Steps>
+  <Step title="Install dependencies">
+    Run `npm install` to install required packages.
+  </Step>
+  <Step title="Configure API key">
+    Add your API key to the `.env` file.
+  </Step>
+  <Step title="Start dev server">
+    Run `npm run dev` to start the development server.
+  </Step>
+</Steps>
+
+```mdx
+<Steps>
+  <Step title="Step 1">
+    Instructions here
+  </Step>
+  <Step title="Step 2">
+    More instructions
+  </Step>
+</Steps>
+```
+
+## Accordions
+
+Hide detailed information in expandable sections:
+
+<Accordion title="Advanced configuration">
+  This content is hidden by default and expands when clicked.
+  Great for optional information or troubleshooting.
+</Accordion>
+
+<AccordionGroup>
+  <Accordion title="First accordion">
+    Content for first item
+  </Accordion>
+  <Accordion title="Second accordion">
+    Content for second item
+  </Accordion>
+</AccordionGroup>
+
+```mdx
+<Accordion title="Title">
+Expandable content here
+</Accordion>
+
+<AccordionGroup>
+  <Accordion title="Item 1">Content 1</Accordion>
+  <Accordion title="Item 2">Content 2</Accordion>
+</AccordionGroup>
+```
+
+## Code Groups
+
+Show code examples in multiple languages:
+
+<CodeGroup>
+  ```javascript Node.js
+  const response = await fetch('/api/docs');
+  const docs = await response.json();
+  ```
+
+  ```python Python
+  import requests
+  response = requests.get('/api/docs')
+  docs = response.json()
+  ```
+
+  ```bash cURL
+  curl https://api.dubstack.com/docs
+  ```
+</CodeGroup>
+
+```mdx
+<CodeGroup>
+  ```javascript Node.js
+  // Code here
+  ```
+
+  ```python Python
+  # Code here
+  ```
+</CodeGroup>
+```
+
+## Icons
+
+Use [Lucide icons](https://lucide.dev) in components:
+
+```mdx
+<Card title="Title" icon="rocket" href="/path">
+```
+
+Common icons: `rocket`, `sparkles`, `code`, `book`, `settings`, `users`, `shield`, `zap`, `heart`, `star`
+
+## Frontmatter
+
+Every MDX file must start with YAML frontmatter:
+
+```yaml
+---
+title: "Page Title"
+description: "SEO description"
+icon: "lucide-icon-name"
+---
+```
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Code examples" icon="code" href="/essentials/code">
+    Learn about code highlighting
+  </Card>
+  <Card title="Images" icon="image" href="/essentials/images">
+    Embed images and media
+  </Card>
+</CardGroup>
