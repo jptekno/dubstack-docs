@@ -1,0 +1,422 @@
+---
+title: "Settings"
+description: "Configure your DubStack documentation site in dubstack.json"
+icon: "gear"
+---
+
+The `dubstack.json` file controls all aspects of your documentation site. This guide covers the most important configuration options.
+
+## Site settings
+
+Basic information about your documentation site:
+
+```json dubstack.json
+{
+  "site": {
+    "name": "DubStack Documentation",
+    "description": "Beautiful, AI-powered documentation",
+    "url": "https://docs.example.com",
+    "logo": "/logo/light.svg",
+    "favicon": "/favicon.svg"
+  }
+}
+```
+
+<ResponseField name="site.name" type="string" required>
+The name of your project. Used in the page title and browser tabs.
+
+Example: `DubStack Documentation`
+</ResponseField>
+
+<ResponseField name="site.description" type="string">
+A brief description of your documentation. Used for SEO and social sharing.
+
+Example: `Beautiful, AI-powered documentation for modern teams`
+</ResponseField>
+
+<ResponseField name="site.url" type="string" required>
+The full URL where your documentation is hosted.
+
+Example: `https://docs.example.com`
+</ResponseField>
+
+<ResponseField name="site.logo" type="string | object">
+Path to your logo. Can be a single path or an object with `light` and `dark` variants.
+
+```json
+"logo": {
+  "light": "/logo/light.svg",
+  "dark": "/logo/dark.svg"
+}
+```
+</ResponseField>
+
+<ResponseField name="site.favicon" type="string">
+Path to your favicon image.
+
+Example: `/favicon.svg`
+</ResponseField>
+
+## Theme settings
+
+Customize colors, fonts, and visual appearance:
+
+```json
+{
+  "theme": {
+    "primary": "#3b82f6",
+    "background": "#ffffff",
+    "text": "#1f2937",
+    "font": {
+      "family": "Inter, sans-serif",
+      "headings": "Inter, sans-serif"
+    },
+    "radius": "0.5rem"
+  }
+}
+```
+
+<Callout type="info">
+FREE tier users can use preset themes. Upgrade to PRO for custom colors and fonts.
+</Callout>
+
+## Navigation
+
+Configure your site navigation:
+
+```json
+{
+  "navigation": {
+    "header": [
+      { "label": "Home", "href": "/" },
+      { "label": "Docs", "href": "/docs" }
+    ],
+    "sidebar": [
+      {
+        "section": "Getting Started",
+        "items": [
+          { "label": "Introduction", "href": "/" },
+          { "label": "Quick Start", "href": "/quickstart" }
+        ]
+      }
+    ],
+    "footer": {
+      "links": [
+        {
+          "section": "Company",
+          "items": [
+            { "label": "About", "href": "/about" },
+            { "label": "Blog", "href": "https://blog.example.com" }
+          ]
+        }
+      ],
+      "social": {
+        "github": "https://github.com/yourorg",
+        "twitter": "https://twitter.com/yourorg"
+      }
+    }
+  }
+}
+```
+
+Learn more in the [Navigation guide](/essentials/navigation).
+
+## Widgets
+
+Enable interactive widgets:
+
+```json
+{
+  "widgets": {
+    "search": {
+      "enabled": true,
+      "placeholder": "Search documentation...",
+      "position": "sidebar"
+    }
+  }
+}
+```
+
+<Callout type="warning">
+AI Assistant and Chat Bar widgets require a PRO subscription. They're not available in the FREE tier.
+</Callout>
+
+## SEO settings
+
+Optimize for search engines:
+
+```json
+{
+  "seo": {
+    "title": "DubStack Documentation",
+    "description": "Beautiful, AI-powered documentation for modern teams",
+    "keywords": ["documentation", "API docs", "developer tools"],
+    "image": "https://docs.example.com/og-image.png",
+    "twitter": {
+      "card": "summary_large_image",
+      "site": "@yourhandle"
+    }
+  }
+}
+```
+
+<ResponseField name="seo.title" type="string">
+Default page title. Individual pages can override this in frontmatter.
+</ResponseField>
+
+<ResponseField name="seo.description" type="string">
+Default meta description for SEO and social sharing.
+</ResponseField>
+
+<ResponseField name="seo.keywords" type="string[]">
+Array of keywords relevant to your documentation.
+</ResponseField>
+
+<ResponseField name="seo.image" type="string">
+Open Graph image URL for social sharing. Should be 1200x630px.
+</ResponseField>
+
+## Integrations
+
+Connect external services:
+
+```json
+{
+  "integrations": {
+    "analytics": {
+      "google": "G-XXXXXXXXXX",
+      "plausible": "docs.example.com"
+    },
+    "feedback": {
+      "github": "https://github.com/yourorg/yourrepo/issues",
+      "email": "feedback@example.com"
+    }
+  }
+}
+```
+
+## Homepage settings
+
+Configure your documentation homepage:
+
+```json
+{
+  "homepage": {
+    "hero": {
+      "title": "Beautiful documentation for modern teams",
+      "subtitle": "Build docs that developers love to read and write",
+      "cta": {
+        "label": "Get Started",
+        "href": "/quickstart"
+      }
+    },
+    "features": [
+      {
+        "title": "AI-Powered Search",
+        "description": "Find answers instantly with intelligent search",
+        "icon": "sparkles"
+      },
+      {
+        "title": "Theme Studio",
+        "description": "Customize colors and fonts visually",
+        "icon": "palette"
+      }
+    ]
+  }
+}
+```
+
+## API settings
+
+Configure API documentation features:
+
+```json
+{
+  "api": {
+    "baseUrl": "https://api.example.com",
+    "authentication": {
+      "type": "bearer",
+      "header": "Authorization"
+    },
+    "playground": {
+      "enabled": true,
+      "interactive": true
+    }
+  }
+}
+```
+
+## Layout options
+
+Control page layout and structure:
+
+```json
+{
+  "layout": {
+    "sidebar": {
+      "width": "280px",
+      "collapsible": true
+    },
+    "content": {
+      "width": "800px"
+    },
+    "toc": {
+      "enabled": true,
+      "levels": [2, 3, 4]
+    }
+  }
+}
+```
+
+## Code highlighting
+
+Configure syntax highlighting:
+
+```json
+{
+  "code": {
+    "theme": "github-dark",
+    "showLineNumbers": true,
+    "copyButton": true
+  }
+}
+```
+
+## Feature flags
+
+Enable or disable features based on your subscription:
+
+```json
+{
+  "features": {
+    "aiAssistant": false,      // PRO only
+    "customTheme": false,       // PRO only
+    "customDomain": false,      // PRO only
+    "gitSync": false,           // PRO only
+    "customCSS": true,          // Available in FREE
+    "search": true              // Available in FREE
+  }
+}
+```
+
+<Callout type="info">
+Feature flags are automatically set based on your subscription tier. You don't need to configure them manually.
+</Callout>
+
+## Complete example
+
+Here's a comprehensive `dubstack.json` example:
+
+```json dubstack.json
+{
+  "site": {
+    "name": "My Documentation",
+    "description": "Comprehensive documentation for developers",
+    "url": "https://docs.example.com",
+    "logo": {
+      "light": "/logo/light.svg",
+      "dark": "/logo/dark.svg"
+    },
+    "favicon": "/favicon.svg"
+  },
+  "theme": {
+    "primary": "#3b82f6",
+    "preset": "modern"
+  },
+  "navigation": {
+    "header": [
+      { "label": "Home", "href": "/" },
+      { "label": "Docs", "href": "/docs" },
+      { "label": "API", "href": "/api-reference" }
+    ],
+    "sidebar": [
+      {
+        "section": "Getting Started",
+        "items": [
+          { "label": "Introduction", "href": "/" },
+          { "label": "Quick Start", "href": "/quickstart" },
+          { "label": "Development", "href": "/development" }
+        ]
+      },
+      {
+        "section": "Essentials",
+        "items": [
+          { "label": "Markdown", "href": "/essentials/markdown" },
+          { "label": "Code", "href": "/essentials/code" },
+          { "label": "Images", "href": "/essentials/images" },
+          { "label": "Navigation", "href": "/essentials/navigation" },
+          { "label": "Snippets", "href": "/essentials/reusable-snippets" },
+          { "label": "Settings", "href": "/essentials/settings" }
+        ]
+      }
+    ],
+    "footer": {
+      "links": [
+        {
+          "section": "Resources",
+          "items": [
+            { "label": "Documentation", "href": "/" },
+            { "label": "API Reference", "href": "/api-reference" }
+          ]
+        }
+      ],
+      "social": {
+        "github": "https://github.com/yourorg",
+        "twitter": "https://twitter.com/yourorg"
+      }
+    }
+  },
+  "widgets": {
+    "search": {
+      "enabled": true,
+      "placeholder": "Search...",
+      "position": "sidebar"
+    }
+  },
+  "seo": {
+    "title": "My Documentation",
+    "description": "Comprehensive documentation for developers",
+    "keywords": ["docs", "api", "developer"],
+    "image": "https://docs.example.com/og-image.png"
+  },
+  "integrations": {
+    "analytics": {
+      "google": "G-XXXXXXXXXX"
+    }
+  }
+}
+```
+
+## Validation
+
+DubStack automatically validates your `dubstack.json` configuration. Common errors:
+
+<AccordionGroup>
+<Accordion title="Invalid JSON syntax">
+  Check for missing commas, unclosed brackets, or trailing commas.
+
+  Use a JSON validator like [jsonlint.com](https://jsonlint.com) to find syntax errors.
+</Accordion>
+
+<Accordion title="Missing required fields">
+  Ensure `site.name`, `site.url`, and `navigation` are defined.
+</Accordion>
+
+<Accordion title="Invalid navigation paths">
+  Navigation hrefs must match actual MDX files. Don't include `.mdx` extensions.
+
+  ✅ `{ "label": "Home", "href": "/" }`
+  ❌ `{ "label": "Home", "href": "/index.mdx" }`
+</Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Theme Studio" icon="palette" href="/features/theme-studio">
+    Customize your theme visually
+  </Card>
+  <Card title="Git Integration" icon="git-branch" href="/features/git-sync">
+    Sync with GitHub, GitLab, or Forgejo
+  </Card>
+</CardGroup>
