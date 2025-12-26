@@ -1,0 +1,89 @@
+---
+title: Quick Start
+description: "Get your documentation site up and running in minutes"
+---
+
+# Quick Start Guide
+
+Get your DubStack documentation site up and running in minutes.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+- A GitHub account
+- A repository for your documentation
+
+## Step 1: Connect Your Repository
+
+<Steps>
+  <Step title="Sign In">
+    Sign in to the DubStack Dashboard with your GitHub account
+  </Step>
+  <Step title="Connect Repository">
+    Click "Connect Repository" and select your GitHub organization
+  </Step>
+  <Step title="Select Repo">
+    Choose the repository that will contain your documentation
+  </Step>
+</Steps>
+
+## Step 2: Add Your Configuration
+
+Create a `dubstack.json` file in your repository root:
+
+```json
+{
+  "$schema": "https://dubstack.dev/schema/v1.json",
+  "site": {
+    "name": "My Docs",
+    "tagline": "Documentation for my project"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#ff6b35"
+    }
+  }
+}
+```
+
+## Step 3: Add Your First Doc
+
+Create MDX files for your documentation:
+
+```mdx
+---
+title: Getting Started
+description: Your first documentation page
+---
+
+# Getting Started
+
+Welcome to the documentation!
+
+<Callout type="info">
+  This is an info callout to highlight important information.
+</Callout>
+```
+
+## Step 4: Push and Deploy
+
+Push your changes to GitHub:
+
+```bash
+git add .
+git commit -m "Add documentation"
+git push origin main
+```
+
+Your documentation will automatically sync and be available at your DubStack URL.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="code" href="/api-reference">
+    Explore all available endpoints
+  </Card>
+  <Card title="Theme Studio" icon="palette" href="/docs/theming">
+    Customize your site's appearance
+  </Card>
+</CardGroup>
