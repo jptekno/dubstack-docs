@@ -1,0 +1,350 @@
+---
+title: "Reusable snippets"
+description: "Create reusable content blocks to keep documentation in sync"
+icon: "recycle"
+---
+
+import SnippetIntro from '/snippets/snippet-intro.mdx';
+
+<SnippetIntro />
+
+Reusable snippets let you write content once and use it across multiple pages. When you update the snippet, all pages using it automatically update.
+
+## Creating snippets
+
+Snippets live in the `/snippets` directory at the root of your documentation repository:
+
+```
+docs/
+├── snippets/
+│   ├── snippet-intro.mdx
+│   ├── prerequisites.mdx
+│   └── common-errors.mdx
+├── index.mdx
+└── quickstart.mdx
+```
+
+<Callout type="info">
+Files in the `/snippets` directory are treated as reusable components and won't be rendered as standalone pages.
+</Callout>
+
+## Using snippets
+
+### Basic usage
+
+1. Create a snippet file in `/snippets`:
+
+```mdx snippets/installation-steps.mdx
+## Installation
+
+Run the following command to install DubStack:
+
+```bash
+npm install @dubstack/sdk
+```
+
+Verify the installation:
+
+```bash
+dubstack --version
+```
+```
+
+2. Import and use the snippet in any page:
+
+```mdx quickstart.mdx
+---
+title: "Quick Start"
+description: "Get started with DubStack"
+---
+
+import InstallationSteps from '/snippets/installation-steps.mdx';
+
+# Quick Start Guide
+
+<InstallationSteps />
+
+Now you're ready to build!
+```
+
+### Snippets with variables
+
+Pass props to customize snippet content:
+
+1. Create a snippet with variables:
+
+```mdx snippets/api-example.mdx
+## {props.method} {props.endpoint}
+
+{props.description}
+
+```bash
+curl -X {props.method} https://api.dubstack.com{props.endpoint} \
+  -H 'Authorization: Bearer YOUR_API_KEY'
+```
+```
+
+2. Use the snippet with different values:
+
+```mdx api-docs.mdx
+import ApiExample from '/snippets/api-example.mdx';
+
+<ApiExample
+  method="GET"
+  endpoint="/docs"
+  description="Retrieve all documentation pages"
+/>
+
+<ApiExample
+  method="POST"
+  endpoint="/docs"
+  description="Create a new documentation page"
+/>
+```
+
+### Reusable variables
+
+Export constants from snippets:
+
+```mdx snippets/constants.mdx
+export const API_URL = 'https://api.dubstack.com';
+export const API_VERSION = 'v1';
+export const SUPPORTED_FORMATS = ['MDX', 'Markdown', 'HTML'];
+```
+
+Use them in your pages:
+
+```mdx documentation.mdx
+import { API_URL, API_VERSION, SUPPORTED_FORMATS } from '/snippets/constants.mdx';
+
+The DubStack API is available at {API_URL}/{API_VERSION}.
+
+We support the following formats: {SUPPORTED_FORMATS.join(', ')}.
+```
+
+### Reusable components
+
+Create component functions for more complex reusable content:
+
+```mdx snippets/callout-box.mdx
+export const InfoBox = ({ title, children }) => (
+  <div style={{
+    padding: '1rem',
+    backgroundColor: '#e0f2fe',
+    borderLeft: '4px solid #0284c7',
+    borderRadius: '0.5rem'
+  }}>
+    <strong>{title}</strong>
+    <div>{children}</div>
+  </div>
+);
+```
+
+Use the component:
+
+```mdx guide.mdx
+import { InfoBox } from '/snippets/callout-box.mdx';
+
+<InfoBox title="Important">
+Remember to save your API key securely!
+</InfoBox>
+```
+
+<Callout type="warning">
+MDX doesn't compile inside arrow function components. Use HTML syntax or default exports when you need full MDX support.
+</Callout>
+
+## Common use cases
+
+### Prerequisites snippet
+
+Create a standard prerequisites section:
+
+```mdx snippets/prerequisites.mdx
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- Node.js 18+ installed
+- A DubStack account ([sign up for free](https://dubstack.com/signup))
+- Your API key from the [dashboard](https://console.dubstack.com/admin/api-keys)
+```
+
+Use it in every guide:
+
+```mdx guide.mdx
+import Prerequisites from '/snippets/prerequisites.mdx';
+
+# Feature Guide
+
+<Prerequisites />
+
+## Setup
+
+...
+```
+
+### Authentication example
+
+Reuse authentication instructions:
+
+```mdx snippets/auth-example.mdx
+All API requests require authentication using a bearer token:
+
+```bash
+curl https://api.dubstack.com/docs \
+  -H 'Authorization: Bearer YOUR_API_KEY'
+```
+
+Get your API key from the [dashboard](https://console.dubstack.com/admin/api-keys).
+```
+
+### Common errors
+
+Document common errors once:
+
+```mdx snippets/common-errors.mdx
+<AccordionGroup>
+<Accordion title="401 Unauthorized">
+  Your API key is invalid or missing. Check that you're including the `Authorization` header with a valid bearer token.
+</Accordion>
+
+<Accordion title="429 Rate Limited">
+  You've exceeded the rate limit. Upgrade your plan for higher limits or wait before making more requests.
+</Accordion>
+
+<Accordion title="500 Internal Server Error">
+  Something went wrong on our end. Check the [status page](https://status.dubstack.com) or contact support.
+</Accordion>
+</AccordionGroup>
+```
+
+## Nested imports
+
+Snippets can import other snippets:
+
+```mdx snippets/api-setup.mdx
+import Prerequisites from '/snippets/prerequisites.mdx';
+import AuthExample from '/snippets/auth-example.mdx';
+
+<Prerequisites />
+
+## Authentication
+
+<AuthExample />
+```
+
+## Benefits of snippets
+
+<Steps>
+  <Step title="Single source of truth">
+    Update content in one place and it changes everywhere it's used.
+  </Step>
+
+  <Step title="Consistency">
+    Ensure important information (like API endpoints or prerequisites) is identical across all pages.
+  </Step>
+
+  <Step title="Maintainability">
+    Easier to update documentation when you only need to change one file.
+  </Step>
+
+  <Step title="Reduce duplication">
+    Don't repeat yourself - write once, use everywhere.
+  </Step>
+</Steps>
+
+## Best practices
+
+<Callout type="success">
+**Do** use snippets for content that appears on multiple pages (prerequisites, authentication examples, common errors).
+</Callout>
+
+<Callout type="success">
+**Do** keep snippets focused and single-purpose.
+</Callout>
+
+<Callout type="warning">
+**Don't** overuse snippets for content that's only used once or twice.
+</Callout>
+
+<Callout type="warning">
+**Don't** create deeply nested snippet hierarchies - keep it simple.
+</Callout>
+
+## Complete example
+
+Here's a full example of creating and using a snippet:
+
+**snippets/quickstart-steps.mdx:**
+```mdx
+export const QuickStartSteps = ({ language = 'npm' }) => {
+  const commands = {
+    npm: 'npm install @dubstack/sdk',
+    yarn: 'yarn add @dubstack/sdk',
+    pnpm: 'pnpm add @dubstack/sdk'
+  };
+
+  return (
+    <Steps>
+      <Step title="Install the SDK">
+        ```bash
+        {commands[language]}
+        ```
+      </Step>
+
+      <Step title="Initialize the client">
+        ```javascript
+        import { DubStack } from '@dubstack/sdk';
+
+        const client = new DubStack({
+          apiKey: process.env.DUBSTACK_API_KEY
+        });
+        ```
+      </Step>
+
+      <Step title="Make your first request">
+        ```javascript
+        const docs = await client.docs.list();
+        console.log(docs);
+        ```
+      </Step>
+    </Steps>
+  );
+};
+```
+
+**quickstart.mdx:**
+```mdx
+---
+title: "Quick Start"
+description: "Get started with DubStack in 5 minutes"
+---
+
+import { QuickStartSteps } from '/snippets/quickstart-steps.mdx';
+
+# Quick Start
+
+<Tabs>
+  <Tab title="npm">
+    <QuickStartSteps language="npm" />
+  </Tab>
+  <Tab title="yarn">
+    <QuickStartSteps language="yarn" />
+  </Tab>
+  <Tab title="pnpm">
+    <QuickStartSteps language="pnpm" />
+  </Tab>
+</Tabs>
+```
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Settings" icon="gear" href="/essentials/settings">
+    Configure global site settings
+  </Card>
+  <Card title="MDX Components" icon="shapes" href="/essentials/markdown">
+    Learn about all available components
+  </Card>
+</CardGroup>
