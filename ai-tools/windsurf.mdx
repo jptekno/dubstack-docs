@@ -1,0 +1,267 @@
+---
+title: "Windsurf setup"
+description: "Configure Windsurf IDE for DubStack documentation"
+icon: "wind"
+---
+
+Windsurf is an AI-powered IDE that excels at technical documentation. This guide shows how to set up Windsurf for writing DubStack docs with MDX components.
+
+## Prerequisites
+
+- Windsurf IDE installed
+- DubStack project cloned locally
+
+## Configuration
+
+### 1. Create workspace settings
+
+Create `.windsurf/settings.json` in your docs repository:
+
+```json
+{
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "mdx.validate.enabled": true,
+  "[mdx]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    }
+  }
+}
+```
+
+### 2. Install recommended extensions
+
+Add to `.windsurf/extensions.json`:
+
+```json
+{
+  "recommendations": [
+    "unifiedjs.vscode-mdx",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "lucide.lucide-vscode"
+  ]
+}
+```
+
+### 3. Configure AI rules
+
+Create `.windsurf/ai-rules.md`:
+
+````markdown
+# DubStack Documentation AI Rules
+
+## Project type
+Technical documentation using MDX format for DubStack documentation platform.
+
+## Writing style
+- Second-person voice ("you" not "we")
+- Active voice preferred
+- Present tense for current states
+- Clear, concise, actionable language
+- Technical but accessible
+
+## MDX components available
+
+### Structural
+- `<Card>` - Feature cards with icons
+- `<CardGroup cols={2|3}>` - Grid of cards
+- `<Tabs>` - Tabbed content
+- `<Tab title="">` - Individual tab
+- `<Steps>` - Numbered procedures
+- `<Step title="">` - Individual step
+- `<Accordion title="">` - Collapsible section
+- `<AccordionGroup>` - Multiple accordions
+
+### Content
+- `<Callout type="info|warning|success|error">` - Highlighted information
+- `<CodeGroup>` - Multi-language code examples
+- `<Frame>` - Image wrapper with border
+
+### Code
+```language filename.ext
+code here
+```
+
+## Page structure
+Every MDX file must start with:
+
+```yaml
+---
+title: "Page Title"
+description: "Page description for SEO"
+icon: "lucide-icon-name"
+---
+```
+
+## Best practices
+- Test all code examples
+- Include prerequisites for procedures
+- Use descriptive alt text for images
+- Provide troubleshooting for common issues
+- Keep examples simple but complete
+- Show expected outcomes
+- Link to related documentation
+````
+
+## AI chat prompts
+
+Use these prompts to leverage Windsurf's AI for documentation tasks:
+
+<AccordionGroup>
+<Accordion title="Create new doc page">
+  ```
+  Create a new MDX documentation page about [topic].
+  Include:
+  - Frontmatter with title, description, icon
+  - Overview section
+  - Prerequisites
+  - Step-by-step instructions
+  - Code examples
+  - Troubleshooting section
+  - Related links
+  ```
+</Accordion>
+
+<Accordion title="Improve existing content">
+  ```
+  Review this documentation page and improve:
+  - Clarity and conciseness
+  - Technical accuracy
+  - Code examples (add if missing)
+  - Accessibility (alt text, headings)
+  - SEO (keywords, descriptions)
+  Maintain the existing structure and frontmatter.
+  ```
+</Accordion>
+
+<Accordion title="Generate API documentation">
+  ```
+  Document this API endpoint using DubStack components:
+  - Method and path
+  - Authentication requirements
+  - Request parameters (ParamField if available)
+  - Request body schema
+  - Success response examples
+  - Error responses
+  - Code examples in multiple languages
+  ```
+</Accordion>
+
+<Accordion title="Convert README to docs">
+  ```
+  Convert this README.md to professional MDX documentation:
+  - Add proper frontmatter
+  - Split into logical sections
+  - Use DubStack components (Cards, Steps, Callouts)
+  - Add code examples with syntax highlighting
+  - Include prerequisites and troubleshooting
+  - Improve readability and SEO
+  ```
+</Accordion>
+</AccordionGroup>
+
+## Flow mode tips
+
+Windsurf's Flow mode excels at documentation tasks:
+
+<Steps>
+  <Step title="Enable Flow mode">
+    Press `Cmd+Shift+F` or click the Flow icon in the sidebar.
+  </Step>
+
+  <Step title="Describe your documentation task">
+    ```
+    "Create comprehensive API documentation for all endpoints in src/api/routes.ts"
+    ```
+  </Step>
+
+  <Step title="Review and refine">
+    Flow will work through the codebase, generating documentation.
+    Review each change and provide feedback for improvements.
+  </Step>
+
+  <Step title="Commit changes">
+    Once satisfied, commit the generated documentation to version control.
+  </Step>
+</Steps>
+
+## Keyboard shortcuts
+
+<Tabs>
+  <Tab title="macOS">
+    - `Cmd+K` - Open AI chat
+    - `Cmd+Shift+F` - Toggle Flow mode
+    - `Cmd+L` - Select with AI
+    - `Cmd+I` - Inline AI edit
+    - `Option+Cmd+M` - Generate commit message
+  </Tab>
+  <Tab title="Windows/Linux">
+    - `Ctrl+K` - Open AI chat
+    - `Ctrl+Shift+F` - Toggle Flow mode
+    - `Ctrl+L` - Select with AI
+    - `Ctrl+I` - Inline AI edit
+    - `Alt+Ctrl+M` - Generate commit message
+  </Tab>
+</Tabs>
+
+## Example workflows
+
+### Document a new feature
+
+1. Open the feature's source code in Windsurf
+2. Open AI chat (`Cmd+K`)
+3. Prompt: "Document this feature for end users. Create an MDX page with setup instructions, usage examples, and troubleshooting."
+4. Review and refine the generated documentation
+5. Add to navigation in `dubstack.json`
+
+### Update documentation after code changes
+
+1. Select the changed code
+2. Inline AI edit (`Cmd+I`)
+3. Prompt: "Update the documentation in docs/[page].mdx to reflect these code changes"
+4. Review the proposed documentation updates
+5. Accept or refine changes
+
+## Troubleshooting
+
+<AccordionGroup>
+<Accordion title="MDX syntax errors">
+  Ensure you have the MDX extension installed:
+
+  ```bash
+  windsurf --install-extension unifiedjs.vscode-mdx
+  ```
+</Accordion>
+
+<Accordion title="AI not understanding DubStack components">
+  Check that `.windsurf/ai-rules.md` exists and includes component definitions.
+  Restart Windsurf after adding AI rules.
+</Accordion>
+
+<Accordion title="Formatting issues">
+  Install Prettier and configure format on save:
+
+  ```bash
+  windsurf --install-extension esbenp.prettier-vscode
+  ```
+</Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="MDX components" icon="shapes" href="/essentials/markdown">
+    Learn all DubStack MDX components
+  </Card>
+  <Card title="Configuration" icon="gear" href="/essentials/settings">
+    Configure dubstack.json for your needs
+  </Card>
+</CardGroup>
