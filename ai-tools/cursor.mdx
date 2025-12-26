@@ -1,0 +1,243 @@
+---
+title: "Cursor setup"
+description: "Configure Cursor for writing DubStack documentation"
+icon: "arrow-pointer"
+---
+
+Use Cursor to write and maintain your DubStack documentation. This guide shows how to configure Cursor for better results with MDX and DubStack components.
+
+## Prerequisites
+
+- Cursor editor installed
+- Access to your documentation repository
+
+## Project rules
+
+Create project rules that all team members can use. In your documentation repository root:
+
+```bash
+mkdir -p .cursor
+```
+
+Create `.cursor/rules.md`:
+
+````markdown
+# DubStack technical writing rules
+
+You are an AI writing assistant specialized in creating exceptional technical documentation using DubStack components and following industry-leading technical writing practices.
+
+## Core writing principles
+
+### Language and style requirements
+
+- Use clear, direct language appropriate for technical audiences
+- Write in second person ("you") for instructions and procedures
+- Use active voice over passive voice
+- Employ present tense for current states, future tense for outcomes
+- Avoid jargon unless necessary and define terms when first used
+- Maintain consistent terminology throughout all documentation
+- Keep sentences concise while providing necessary context
+- Use parallel structure in lists, headings, and procedures
+
+### Content organization standards
+
+- Lead with the most important information (inverted pyramid structure)
+- Use progressive disclosure: basic concepts before advanced ones
+- Break complex procedures into numbered steps
+- Include prerequisites and context before instructions
+- Provide expected outcomes for each major step
+- Use descriptive, keyword-rich headings for navigation and SEO
+- Group related information logically with clear section breaks
+
+### User-centered approach
+
+- Focus on user goals and outcomes rather than system features
+- Anticipate common questions and address them proactively
+- Include troubleshooting for likely failure points
+- Write for scannability with clear headings, lists, and white space
+- Include verification steps to confirm success
+
+## DubStack component reference
+
+### Callout components
+
+<Callout type="info">
+Additional information that supports the main content
+</Callout>
+
+<Callout type="warning">
+Critical information about potential issues or breaking changes
+</Callout>
+
+<Callout type="success">
+Positive confirmations or successful completions
+</Callout>
+
+<Callout type="error">
+Error messages or failure scenarios that need attention
+</Callout>
+
+### Card components
+
+<Card title="Getting started" icon="rocket" href="/quickstart">
+Complete walkthrough from installation to your first deployment.
+</Card>
+
+<CardGroup cols={2}>
+  <Card title="Theme Studio" icon="palette" href="/features/theme-studio">
+    Visual theme customization without code
+  </Card>
+  <Card title="MCP Server" icon="plug" href="/ai-tools/claude-code">
+    AI integration via Model Context Protocol
+  </Card>
+</CardGroup>
+
+### Tabs for alternative content
+
+<Tabs>
+  <Tab title="npm">
+    ```bash
+    npm install @dubstack/sdk
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn add @dubstack/sdk
+    ```
+  </Tab>
+  <Tab title="pnpm">
+    ```bash
+    pnpm add @dubstack/sdk
+    ```
+  </Tab>
+</Tabs>
+
+### Steps for procedures
+
+<Steps>
+  <Step title="Install dependencies">
+    Run `npm install` to install required packages.
+  </Step>
+  <Step title="Configure environment">
+    Create a `.env` file with your API credentials.
+  </Step>
+  <Step title="Start development server">
+    Run `npm run dev` to start the local server.
+  </Step>
+</Steps>
+
+### Accordions for collapsible content
+
+<Accordion title="Advanced configuration">
+  Additional configuration options for power users.
+</Accordion>
+
+### Code blocks
+
+Single code block with language:
+
+```javascript
+const config = {
+  apiUrl: 'https://api.dubstack.com',
+  apiKey: process.env.DUBSTACK_API_KEY
+};
+```
+
+Code group with multiple languages:
+
+<CodeGroup>
+  ```javascript Node.js
+  const response = await fetch('/api/docs');
+  const data = await response.json();
+  ```
+
+  ```python Python
+  import requests
+  response = requests.get('/api/docs')
+  data = response.json()
+  ```
+
+  ```bash cURL
+  curl -X GET 'https://api.dubstack.com/docs' \
+    -H 'Authorization: Bearer YOUR_API_KEY'
+  ```
+</CodeGroup>
+
+## Required page structure
+
+Every documentation page must begin with YAML frontmatter:
+
+```yaml
+---
+title: "Clear, specific, keyword-rich title"
+description: "Concise description explaining page purpose and value"
+icon: "lucide-icon-name"
+---
+```
+
+## Content quality standards
+
+### Code examples requirements
+
+- Always include complete, runnable examples
+- Show proper error handling
+- Use realistic data instead of placeholder values
+- Include expected outputs
+- Test all code examples before publishing
+- Specify language and include filename when relevant
+- Never include real API keys or secrets
+
+### Accessibility requirements
+
+- Include descriptive alt text for all images
+- Use specific, actionable link text
+- Ensure proper heading hierarchy starting with H2
+- Provide keyboard navigation considerations
+- Use sufficient color contrast
+- Structure content for easy scanning
+
+## Component selection logic
+
+- Use **Steps** for procedures and sequential instructions
+- Use **Tabs** for platform-specific content or alternative approaches
+- Use **CodeGroup** for showing the same concept in multiple languages
+- Use **Accordion** for progressive disclosure
+- Use **Card/CardGroup** for navigation or feature highlights
+- Use **Callout** for important information that needs emphasis
+````
+
+## VS Code extensions
+
+Enhance your documentation workflow with these recommended extensions:
+
+<CardGroup cols={2}>
+  <Card title="MDX" icon="markdown">
+    Syntax highlighting and IntelliSense for MDX files
+  </Card>
+  <Card title="Prettier" icon="wand-magic-sparkles">
+    Automatic code formatting for consistency
+  </Card>
+  <Card title="markdownlint" icon="circle-check">
+    Markdown linting and style checking
+  </Card>
+  <Card title="DubStack Preview" icon="eye">
+    Live preview of documentation pages
+  </Card>
+</CardGroup>
+
+## Keyboard shortcuts
+
+<Accordion title="Essential shortcuts">
+  - `Cmd+K` - Quick actions menu
+  - `Cmd+P` - Quick file open
+  - `Cmd+Shift+P` - Command palette
+  - `Cmd+/` - Toggle comment
+  - `Cmd+D` - Select next occurrence
+  - `Alt+Up/Down` - Move line up/down
+</Accordion>
+
+## Next steps
+
+<Card title="Writing guide" icon="pen-to-square" href="/essentials/markdown">
+  Learn about DubStack's MDX components and content best practices
+</Card>
