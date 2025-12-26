@@ -1,0 +1,288 @@
+{
+  "$schema": "https://dubstack.dev/schema/v1.json",
+  "site": {
+    "name": "Dubstack",
+    "tagline": "Beautiful, AI-powered documentation for modern teams",
+    "logo": {
+      "light": "/logo/light.svg",
+      "dark": "/logo/dark.svg"
+    },
+    "favicon": "/img/favicon.ico",
+    "timezone": "UTC"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#ff6b35",
+      "accent": "#14b8a6",
+      "background": "#0e0e10",
+      "sidebar_background": "#18171A",
+      "content_background": "#0e0e10",
+      "header_background": "#0e0e10",
+      "footer_background": "#18171A",
+      "text_primary": "#f3f4f6",
+      "text_secondary": "#a1a1aa",
+      "text_muted": "#71717a",
+      "border_default": "#ffffff14",
+      "border_subtle": "rgba(255, 255, 255, 0.06)"
+    },
+    "fonts": {
+      "heading": "Inter",
+      "body": "Inter",
+      "code": "JetBrains Mono"
+    },
+    "code_block": {
+      "background": "#0d0d0d",
+      "header_background": "#18171A",
+      "border_color": "#2d2d2d",
+      "header_height": 32,
+      "radius": 18,
+      "syntax_theme": "github-dark"
+    },
+    "scrollbar": {
+      "track_dark": "#1a1a1a",
+      "thumb_dark": "#404040",
+      "track_light": "#f0f0f0",
+      "thumb_light": "#c0c0c0"
+    }
+  },
+  "widgets": {
+    "search": {
+      "enabled": true,
+      "placeholder": "Search...",
+      "position": "sidebar"
+    },
+    "assistant": {
+      "title": "Assistant",
+      "welcome_title": "Hi! How can I help you today?",
+      "welcome_subtitle": "Ask me anything about the docs, code samples, or best practices.",
+      "background_color": "#0e0e10",
+      "width": 300
+    }
+  },
+  "layout": {
+    "sidebar": {
+      "width": 200,
+      "position": "left",
+      "collapsible": true
+    },
+    "header": {
+      "height": 70,
+      "sticky": true
+    },
+    "content": {
+      "max_width": 900
+    },
+    "canvas": {
+      "components": [
+        {
+          "instanceId": "default-header",
+          "componentId": "site-header",
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 56,
+          "zIndex": 2
+        },
+        {
+          "instanceId": "default-sidebar",
+          "componentId": "sidebar-nav",
+          "x": 0,
+          "y": 56,
+          "width": 200,
+          "height": 844,
+          "zIndex": 1
+        },
+        {
+          "instanceId": "default-assistant",
+          "componentId": "assistant-widget",
+          "x": 900,
+          "y": 56,
+          "width": 300,
+          "height": 844,
+          "zIndex": 10
+        },
+        {
+          "instanceId": "main-content",
+          "componentId": "main-content",
+          "x": 224,
+          "y": 56,
+          "width": 600,
+          "height": 844,
+          "zIndex": 1,
+          "locked": true
+        }
+      ],
+      "last_updated": "2025-12-26T03:00:00.000Z"
+    }
+  },
+  "navigation": {
+    "header": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Docs",
+        "href": "/docs"
+      }
+    ],
+    "sidebar": [
+      {
+        "section": "Getting Started",
+        "icon": "rocket",
+        "items": [
+          {
+            "label": "Introduction",
+            "href": "/",
+            "icon": "book"
+          },
+          {
+            "label": "Quick Start",
+            "href": "/quickstart",
+            "icon": "zap"
+          },
+          {
+            "label": "Development",
+            "href": "/development",
+            "icon": "code"
+          }
+        ]
+      },
+      {
+        "section": "Essentials",
+        "icon": "layers",
+        "items": [
+          {
+            "label": "MDX Components",
+            "href": "/essentials/markdown",
+            "icon": "shapes"
+          },
+          {
+            "label": "Code Blocks",
+            "href": "/essentials/code",
+            "icon": "code"
+          },
+          {
+            "label": "Images & Media",
+            "href": "/essentials/images",
+            "icon": "image"
+          },
+          {
+            "label": "Navigation",
+            "href": "/essentials/navigation",
+            "icon": "map"
+          },
+          {
+            "label": "Reusable Snippets",
+            "href": "/essentials/reusable-snippets",
+            "icon": "recycle"
+          },
+          {
+            "label": "Settings",
+            "href": "/essentials/settings",
+            "icon": "gear"
+          }
+        ]
+      },
+      {
+        "section": "API Reference",
+        "icon": "code",
+        "items": [
+          {
+            "label": "Introduction",
+            "href": "/api-reference/introduction",
+            "icon": "book"
+          },
+          {
+            "label": "GET Endpoint",
+            "href": "/api-reference/endpoint/get",
+            "icon": "arrow-down"
+          },
+          {
+            "label": "POST Endpoint",
+            "href": "/api-reference/endpoint/create",
+            "icon": "arrow-up"
+          },
+          {
+            "label": "DELETE Endpoint",
+            "href": "/api-reference/endpoint/delete",
+            "icon": "trash"
+          },
+          {
+            "label": "Webhooks",
+            "href": "/api-reference/endpoint/webhook",
+            "icon": "webhook"
+          }
+        ]
+      },
+      {
+        "section": "AI Tools",
+        "icon": "sparkles",
+        "items": [
+          {
+            "label": "Claude Code",
+            "href": "/ai-tools/claude-code",
+            "icon": "terminal"
+          },
+          {
+            "label": "Cursor",
+            "href": "/ai-tools/cursor",
+            "icon": "arrow-pointer"
+          },
+          {
+            "label": "Windsurf",
+            "href": "/ai-tools/windsurf",
+            "icon": "wind"
+          }
+        ]
+      }
+    ]
+  },
+  "homepage": {
+    "type": "docs",
+    "landing_page": null,
+    "hero": {
+      "title": "Welcome to DubStack",
+      "tagline": "Beautiful, AI-powered documentation for modern teams",
+      "cta": {
+        "label": "Get Started",
+        "href": "/quickstart"
+      }
+    }
+  },
+  "sections": {},
+  "footer": {
+    "socials": {},
+    "links": []
+  },
+  "seo": {
+    "title_template": "%s | DubStack Docs",
+    "description": "Beautiful, AI-powered documentation platform for modern teams. Create stunning docs with OpenAPI support, Theme Studio, and MCP server integration.",
+    "og_image": "/images/hero-light.png"
+  },
+  "integrations": {
+    "analytics": {
+      "google": null,
+      "plausible": null
+    },
+    "ai": {
+      "provider": null,
+      "api_key_env": "OPENAI_API_KEY"
+    }
+  },
+  "auth": {
+    "enabled": false,
+    "provider": "oidc",
+    "provider_name": "SSO",
+    "provider_icon_url": "",
+    "oidc": {
+      "issuer": "",
+      "client_id": "",
+      "scopes": "openid profile email",
+      "token_proxy": ""
+    },
+    "feature_tier": "free",
+    "require_auth_for_admin": true,
+    "require_auth_for_docs": false
+  }
+}
