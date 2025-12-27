@@ -127,12 +127,20 @@
   "navigation": {
     "header": [
       {
-        "label": "Home",
-        "href": "/"
-      },
-      {
         "label": "Docs",
         "href": "/docs"
+      },
+      {
+        "label": "API",
+        "href": "/api-reference"
+      },
+      {
+        "label": "Blog",
+        "href": "/blogs"
+      },
+      {
+        "label": "Test",
+        "href": "/test"
       }
     ],
     "sidebar": [
