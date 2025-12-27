@@ -1,7 +1,7 @@
 {
   "$schema": "https://dubstack.dev/schema/v1.json",
   "site": {
-    "name": "Dubstack",
+    "name": "DubStack Docs",
     "tagline": "Beautiful, AI-powered documentation for modern teams",
     "logo": {
       "light": "/logo/light.svg",
@@ -137,6 +137,10 @@
       {
         "label": "Blog",
         "href": "/blogs"
+      },
+      {
+        "label": "Test Nav",
+        "href": "/test"
       }
     ],
     "sidebar": [
