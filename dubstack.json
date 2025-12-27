@@ -43,6 +43,13 @@
       "thumb_dark": "#404040",
       "track_light": "#f0f0f0",
       "thumb_light": "#c0c0c0"
+    },
+    "colors_light": {
+      "content_background": "#709aff",
+      "sidebar_background": "#b444b2",
+      "code_background": "#cbcbcb",
+      "code_header_background": "#bcbbbe",
+      "sidebar_brand_text": "#000000"
     }
   },
   "widgets": {
@@ -112,7 +119,7 @@
           "locked": false
         }
       ],
-      "last_updated": "2025-12-27T05:54:17.791Z"
+      "last_updated": "2025-12-27T07:30:27.249Z"
     }
   },
   "navigation": {
