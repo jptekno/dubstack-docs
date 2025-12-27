@@ -17,9 +17,9 @@
       "background": "#0e0e10",
       "sidebar_background": "#18171A",
       "content_background": "#0e0e10",
-      "header_background": "#FF0000",
+      "header_background": "#0000FF",
       "footer_background": "#18171A",
-      "text_primary": "#00FF00",
+      "text_primary": "#f3f4f6",
       "text_secondary": "#a1a1aa",
       "text_muted": "#71717a",
       "border_default": "#ffffff14",
@@ -112,7 +112,7 @@
           "locked": true
         }
       ],
-      "last_updated": "2025-12-26T03:00:00.000Z"
+      "last_updated": "2025-12-27T05:30:39.164Z"
     }
   },
   "navigation": {
