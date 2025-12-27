@@ -17,7 +17,7 @@
       "background": "#0e0e10",
       "sidebar_background": "#800080",
       "content_background": "#06068e",
-      "header_background": "#0000FF",
+      "header_background": "#068475",
       "footer_background": "#18171A",
       "text_primary": "#f3f4f6",
       "text_secondary": "#a1a1aa",
@@ -47,7 +47,7 @@
     "colors_light": {
       "content_background": "#709aff",
       "sidebar_background": "#b444b2",
-      "navigation_background": "#1f5bff",
+      "navigation_background": "#006358",
       "navigation_text": "#000000",
       "code_background": "#cbcbcb",
       "code_header_background": "#bcbbbe",
@@ -121,7 +121,7 @@
           "locked": false
         }
       ],
-      "last_updated": "2025-12-27T07:59:07.216Z"
+      "last_updated": "2025-12-27T08:08:14.181Z"
     }
   },
   "navigation": {
