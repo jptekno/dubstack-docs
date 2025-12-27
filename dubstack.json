@@ -55,7 +55,7 @@
       "title": "Assistant",
       "welcome_title": "Hi! How can I help you today?",
       "welcome_subtitle": "Ask me anything about the docs, code samples, or best practices.",
-      "background_color": "#0e0e10",
+      "background_color": "#4a4ab5",
       "width": 300
     }
   },
@@ -112,7 +112,7 @@
           "locked": false
         }
       ],
-      "last_updated": "2025-12-27T05:45:34.170Z"
+      "last_updated": "2025-12-27T05:54:17.791Z"
     }
   },
   "navigation": {
