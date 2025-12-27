@@ -137,10 +137,6 @@
       {
         "label": "Blog",
         "href": "/blogs"
-      },
-      {
-        "label": "Test",
-        "href": "/test"
       }
     ],
     "sidebar": [
